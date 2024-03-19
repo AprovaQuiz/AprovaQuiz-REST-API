@@ -8,6 +8,9 @@ import compression from "compression";
 import helmet from "helmet";
 import rateLimit from "express-rate-limit";
 import fs from 'fs';
+import { imageRouter } from "./Routes/routerImage";
+import { userRouter } from "./Routes/routerUser";
+import { passRecoverRouter } from "./Routes/routerPassRecover";
 const path = './build/uploads'
 
 fs.access(path, (error) => {
@@ -60,7 +63,9 @@ app.use(
 );
 
 // Rotas
-
+app.use('/images', imageRouter)
+app.use('/users', userRouter)
+app.use('/passRecovers', passRecoverRouter)
 
 
 mongoose

@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { User } from "../models/User";
+import { User } from "../Models/User";
 import "dotenv/config";
 import { UserInterface } from "../Interfaces/User";
 import { verify } from 'jsonwebtoken';

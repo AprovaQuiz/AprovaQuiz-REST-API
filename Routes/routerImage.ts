@@ -3,7 +3,7 @@ import fs from 'fs';
 import path from 'path';
 import { ImageInterface } from "../Interfaces/Image";
 import { verifyToken } from "../middlewares/authJWT";
-import { Image } from "../models/Image";
+import { Image } from "../Models/Image";
 import { UserInterface } from "../Interfaces/User";
 import { upload } from "../middlewares/storageImg";
 
