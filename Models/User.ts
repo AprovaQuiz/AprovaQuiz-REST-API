@@ -38,6 +38,10 @@ const schema = new mongoose.Schema({
         enum: ["normal", "admin"],
         required: [true, "Informe a role"]
     },
+    image: {
+        type: mongoose.Types.ObjectId,
+        ref: 'Image'
+    }
 },
     {
         timestamps: true
