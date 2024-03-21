@@ -5,7 +5,7 @@ const schema = new mongoose.Schema({
         type: String,
         required: [true, "Precisa do título"]
     },
-    linkfonte: {
+    linkFonte: {
         type: String,
         required: [true, "Sem ser a choquei"]
     },

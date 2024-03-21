@@ -91,7 +91,7 @@ userRouter.post('/login', async (request, response) => {
         const token = jwt.sign({
             id: userFound.id
         }, process.env.API_SECRET || "", {
-            expiresIn: 86400
+            expiresIn: 0 // tenho que testar se n expira
         });
 
 

@@ -13,6 +13,7 @@ const schema = new mongoose.Schema({
                 type: String,
                 maxLenght: 1
             },
+            // talvez faça mais sentido pegar pelo index, mas vou deixar por enquanto
         }],
         validate: {
             validator: (v: []) => {
@@ -26,6 +27,10 @@ const schema = new mongoose.Schema({
         type: String,
         required: [true, "Precisa da Alternatica Correta"],
         maxLenght: 1
+    },
+    image: {
+        type: mongoose.Types.ObjectId,
+        ref: 'Image'
     }
 },
     { timestamps: true })

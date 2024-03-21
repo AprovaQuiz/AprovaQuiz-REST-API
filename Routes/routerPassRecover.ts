@@ -67,8 +67,6 @@ passRecoverRouter.patch('/password', async (request, response) => {
 
     const { email, password, number } = request.body
 
-
-
     const userFound = await User.findOne({ email: email })
 
     if (!userFound) {
@@ -127,6 +125,48 @@ passRecoverRouter.delete("/:id", async (request, response) => {
                 await PassRecover.findByIdAndDelete(id);
 
                 return response.status(200).json({ message: "passRecover deletada" });
+            } catch (error) {
+                return response.status(500).json({ error: error });
+            }
+        } else {
+            return response.status(401).json({ message: "Você não possui este acesso" })
+        }
+    } else {
+        return response.status(403).json({ message: "Token Inválido" })
+    }
+})
+
+passRecoverRouter.get("/", async (request, response) => {
+    const token = await verifyToken(request.headers.authorization)
+
+
+    if (token) {
+        if ((token as UserInterface).role == "admin") {
+            try {
+                const passRecovers = await PassRecover.find()
+
+                return response.status(200).json(passRecovers);
+            } catch (error) {
+                return response.status(500).json({ error: error });
+            }
+        } else {
+            return response.status(401).json({ message: "Você não possui este acesso" })
+        }
+    } else {
+        return response.status(403).json({ message: "Token Inválido" })
+    }
+})
+
+passRecoverRouter.delete("/", async (request, response) => {
+    const token = await verifyToken(request.headers.authorization)
+
+
+    if (token) {
+        if ((token as UserInterface).role == "admin") {
+            try {
+                await PassRecover.deleteMany()
+
+                return response.status(200).json({ message: "passRecover deletados" });
             } catch (error) {
                 return response.status(500).json({ error: error });
             }
