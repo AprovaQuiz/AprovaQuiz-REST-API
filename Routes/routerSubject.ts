@@ -1,24 +1,25 @@
 import { Router } from "express";
-import { CalendarInterface } from "../Interfaces/Calendar";
-import { verifyToken } from "../middlewares/authJWT";
+import { SubjectInterface } from "../Interfaces/Subject";
 import { UserInterface } from "../Interfaces/User";
-import { Calendar } from "../Models/Calendar";
+import { Matter } from "../Models/Matter";
+import { verifyToken } from "../middlewares/authJWT";
 
-export const calendarRouter = Router()
 
-calendarRouter.post("/", async (request, response) => {
+export const subjectRouter = Router()
+
+subjectRouter.post("/", async (request, response) => {
     //req.body
-    const calendar: CalendarInterface = request.body;
+    const subject: SubjectInterface = request.body;
     const token = await verifyToken(request.headers.authorization)
 
     if (token) {
         if ((token as UserInterface).role == "admin") {
             try {
-                const saveCalendar = await Calendar.create(calendar);
+                const saveMatter = await Matter.create(subject);
 
                 return response.status(201).json({
-                    savedID: saveCalendar.id,
-                    message: "Calendário inserido no sistema"
+                    savedID: saveMatter.id,
+                    message: "Assunto inserido no sistema"
                 });
             } catch (error) {
                 return response.status(500).json({ error: error });
@@ -31,15 +32,15 @@ calendarRouter.post("/", async (request, response) => {
     }
 });
 
-calendarRouter.get("/", async (request, response) => {
+subjectRouter.get("/", async (request, response) => {
 
     const token = await verifyToken(request.headers.authorization)
 
     if (token) {
         try {
-            const calendar = await Calendar.find();
+            const subject = await Matter.find().populate('materia')
 
-            return response.status(201).json(calendar);
+            return response.status(201).json(subject);
 
         } catch (error) {
             return response.status(500).json({ error: error });
@@ -50,17 +51,17 @@ calendarRouter.get("/", async (request, response) => {
 
 });
 
-calendarRouter.patch("/:id", async (request, response) => {
+subjectRouter.patch("/:id", async (request, response) => {
     const id = request.params.id; // se alterar em cima altera o parâmetro
     const token = await verifyToken(request.headers.authorization)
-    const calendar: CalendarInterface = request.body;
+    const subject: SubjectInterface = request.body;
 
     if (token) {
         if ((token as UserInterface).role == "admin") {
             try {
-                await Calendar.findByIdAndUpdate(id, calendar);
+                await Matter.findByIdAndUpdate(id, subject);
 
-                return response.status(200).json(calendar);
+                return response.status(200).json(subject);
             } catch (error) {
                 return response.status(500).json({ error: error });
             }
@@ -72,23 +73,23 @@ calendarRouter.patch("/:id", async (request, response) => {
     }
 });
 
-calendarRouter.delete("/:id", async (request, response) => {
+subjectRouter.delete("/:id", async (request, response) => {
     const id = request.params.id; // se alterar em cima altera o parâmetro
     const token = await verifyToken(request.headers.authorization)
-    const calendar: CalendarInterface = request.body;
+    const subject: SubjectInterface = request.body;
 
-    if (!calendar) {
+    if (!subject) {
         return response
             .status(422)
-            .json({ message: "O calendário não foi encontrado" });
+            .json({ message: "O Assunto não foi encontrado" });
     }
 
     if (token) {
         if ((token as UserInterface).role == "admin") {
             try {
-                await Calendar.findByIdAndDelete(id);
+                await Matter.findByIdAndDelete(id);
 
-                return response.status(200).json({ message: "calendário deletado" });
+                return response.status(200).json({ message: "Assunto deletado" });
             } catch (error) {
                 return response.status(500).json({ error: error });
             }

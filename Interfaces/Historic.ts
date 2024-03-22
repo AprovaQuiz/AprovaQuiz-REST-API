@@ -6,5 +6,6 @@ export interface HistoricInterface {
     tipoSimulado: {
         materia: string,
         assunto: string
-    }
+    },
+    user: string
 }

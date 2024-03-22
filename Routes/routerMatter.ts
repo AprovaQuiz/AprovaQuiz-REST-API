@@ -1,24 +1,24 @@
 import { Router } from "express";
-import { CalendarInterface } from "../Interfaces/Calendar";
 import { verifyToken } from "../middlewares/authJWT";
 import { UserInterface } from "../Interfaces/User";
-import { Calendar } from "../Models/Calendar";
+import { MatterInterface } from "../Interfaces/Matter";
+import { Matter } from "../Models/Matter";
 
-export const calendarRouter = Router()
+export const matterRouter = Router()
 
-calendarRouter.post("/", async (request, response) => {
+matterRouter.post("/", async (request, response) => {
     //req.body
-    const calendar: CalendarInterface = request.body;
+    const matter: MatterInterface = request.body;
     const token = await verifyToken(request.headers.authorization)
 
     if (token) {
         if ((token as UserInterface).role == "admin") {
             try {
-                const saveCalendar = await Calendar.create(calendar);
+                const saveMatter = await Matter.create(matter);
 
                 return response.status(201).json({
-                    savedID: saveCalendar.id,
-                    message: "Calendário inserido no sistema"
+                    savedID: saveMatter.id,
+                    message: "Matéria inserida no sistema"
                 });
             } catch (error) {
                 return response.status(500).json({ error: error });
@@ -31,15 +31,15 @@ calendarRouter.post("/", async (request, response) => {
     }
 });
 
-calendarRouter.get("/", async (request, response) => {
+matterRouter.get("/", async (request, response) => {
 
     const token = await verifyToken(request.headers.authorization)
 
     if (token) {
         try {
-            const calendar = await Calendar.find();
+            const matter = await Matter.find();
 
-            return response.status(201).json(calendar);
+            return response.status(201).json(matter);
 
         } catch (error) {
             return response.status(500).json({ error: error });
@@ -50,17 +50,17 @@ calendarRouter.get("/", async (request, response) => {
 
 });
 
-calendarRouter.patch("/:id", async (request, response) => {
+matterRouter.patch("/:id", async (request, response) => {
     const id = request.params.id; // se alterar em cima altera o parâmetro
     const token = await verifyToken(request.headers.authorization)
-    const calendar: CalendarInterface = request.body;
+    const matter: MatterInterface = request.body;
 
     if (token) {
         if ((token as UserInterface).role == "admin") {
             try {
-                await Calendar.findByIdAndUpdate(id, calendar);
+                await Matter.findByIdAndUpdate(id, matter);
 
-                return response.status(200).json(calendar);
+                return response.status(200).json(matter);
             } catch (error) {
                 return response.status(500).json({ error: error });
             }
@@ -72,23 +72,23 @@ calendarRouter.patch("/:id", async (request, response) => {
     }
 });
 
-calendarRouter.delete("/:id", async (request, response) => {
+matterRouter.delete("/:id", async (request, response) => {
     const id = request.params.id; // se alterar em cima altera o parâmetro
     const token = await verifyToken(request.headers.authorization)
-    const calendar: CalendarInterface = request.body;
+    const matter: MatterInterface = request.body;
 
-    if (!calendar) {
+    if (!matter) {
         return response
             .status(422)
-            .json({ message: "O calendário não foi encontrado" });
+            .json({ message: "A Matéria não foi encontrado" });
     }
 
     if (token) {
         if ((token as UserInterface).role == "admin") {
             try {
-                await Calendar.findByIdAndDelete(id);
+                await Matter.findByIdAndDelete(id);
 
-                return response.status(200).json({ message: "calendário deletado" });
+                return response.status(200).json({ message: "Matéria deletada" });
             } catch (error) {
                 return response.status(500).json({ error: error });
             }
