@@ -1,18 +1,18 @@
 import mongoose from 'mongoose';
 
 const schema = new mongoose.Schema({
-    materia: {
-        type: mongoose.Types.ObjectId,
-        ref: 'Matter'
+    pertence: {
+        type: String,
+        enum: [
+            "Ciências da Natureza", "Ciências Humanas",
+            "Matemática", "Linguagens"
+        ],
+        required: [true, "É necessário informar o que a matéria pertence"]
     },
     nome: {
         type: String,
-        required: [true, "É necessário o nome do assunto"]
+        required: [true, "É necessário o nome da matéria"]
     },
-    questions: [{
-        type: mongoose.Types.ObjectId,
-        ref: 'Question'
-    }],
     image: {
         type: mongoose.Types.ObjectId,
         ref: 'Image'

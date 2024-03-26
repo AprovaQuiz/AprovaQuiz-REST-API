@@ -1,7 +1,6 @@
 export interface SubjectInterface {
     id: string,
-    materia: string,
+    pertence: string,
     nome: string,
-    questions: [string],
     image: string
 }

@@ -90,9 +90,11 @@ userRouter.post('/login', async (request, response) => {
 
         const token = jwt.sign({
             id: userFound.id
-        }, process.env.API_SECRET || "", {
-            expiresIn: 0 // tenho que testar se n expira
-        });
+        }, process.env.API_SECRET || "", 
+/*         {
+            expiresIn:  // tenho que testar se n expira
+        } */
+        );
 
 
         return response.status(200)

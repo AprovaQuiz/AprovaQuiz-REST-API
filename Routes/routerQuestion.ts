@@ -1,24 +1,24 @@
 import { Router } from "express";
-import { verifyToken } from "../middlewares/authJWT";
+import { QuestionInterface } from "../Interfaces/Question";
 import { UserInterface } from "../Interfaces/User";
-import { MatterInterface } from "../Interfaces/Matter";
-import { Matter } from "../Models/Matter";
+import { Question } from "../Models/Question";
+import { verifyToken } from "../middlewares/authJWT";
 
-export const matterRouter = Router()
+export const questionRouter = Router()
 
-matterRouter.post("/", async (request, response) => {
+questionRouter.post("/", async (request, response) => {
     //req.body
-    const matter: MatterInterface = request.body;
+    const question: QuestionInterface = request.body;
     const token = await verifyToken(request.headers.authorization)
 
     if (token) {
         if ((token as UserInterface).role == "admin") {
             try {
-                const saveMatter = await Matter.create(matter);
+                const saveQuestion = await Question.create(question);
 
                 return response.status(201).json({
-                    savedID: saveMatter.id,
-                    message: "Matéria inserida no sistema"
+                    savedID: saveQuestion.id,
+                    message: "Assunto inserido no sistema"
                 });
             } catch (error) {
                 return response.status(500).json({ error: error });
@@ -31,15 +31,15 @@ matterRouter.post("/", async (request, response) => {
     }
 });
 
-matterRouter.get("/", async (request, response) => {
+questionRouter.get("/", async (request, response) => {
 
     const token = await verifyToken(request.headers.authorization)
 
     if (token) {
         try {
-            const matter = await Matter.find();
+            const question = await Question.find().populate('materia')
 
-            return response.status(201).json(matter);
+            return response.status(201).json(question);
 
         } catch (error) {
             return response.status(500).json({ error: error });
@@ -50,17 +50,17 @@ matterRouter.get("/", async (request, response) => {
 
 });
 
-matterRouter.patch("/:id", async (request, response) => {
+questionRouter.patch("/:id", async (request, response) => {
     const id = request.params.id; // se alterar em cima altera o parâmetro
     const token = await verifyToken(request.headers.authorization)
-    const matter: MatterInterface = request.body;
+    const question: QuestionInterface = request.body;
 
     if (token) {
         if ((token as UserInterface).role == "admin") {
             try {
-                await Matter.findByIdAndUpdate(id, matter);
+                await Question.findByIdAndUpdate(id, question);
 
-                return response.status(200).json(matter);
+                return response.status(200).json(question);
             } catch (error) {
                 return response.status(500).json({ error: error });
             }
@@ -72,23 +72,23 @@ matterRouter.patch("/:id", async (request, response) => {
     }
 });
 
-matterRouter.delete("/:id", async (request, response) => {
+questionRouter.delete("/:id", async (request, response) => {
     const id = request.params.id; // se alterar em cima altera o parâmetro
     const token = await verifyToken(request.headers.authorization)
-    const matter: MatterInterface = request.body;
+    const question: QuestionInterface = request.body;
 
-    if (!matter) {
+    if (!question) {
         return response
             .status(422)
-            .json({ message: "A Matéria não foi encontrado" });
+            .json({ message: "A Questão não foi encontrado" });
     }
 
     if (token) {
         if ((token as UserInterface).role == "admin") {
             try {
-                await Matter.findByIdAndDelete(id);
+                await Question.findByIdAndDelete(id);
 
-                return response.status(200).json({ message: "Matéria deletada" });
+                return response.status(200).json({ message: "Questão Deletada" });
             } catch (error) {
                 return response.status(500).json({ error: error });
             }
@@ -99,3 +99,4 @@ matterRouter.delete("/:id", async (request, response) => {
         return response.status(403).json({ message: "Token Inválido" })
     }
 });
+

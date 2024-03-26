@@ -11,6 +11,12 @@ import fs from 'fs';
 import { imageRouter } from "./Routes/routerImage";
 import { userRouter } from "./Routes/routerUser";
 import { passRecoverRouter } from "./Routes/routerPassRecover";
+import { calendarRouter } from "./Routes/routerCalendar";
+import { historicRouter } from "./Routes/routerHistoric";
+import { newsRouter } from "./Routes/routerNews";
+import { questionRouter } from "./Routes/routerQuestion";
+import { topicRouter } from "./Routes/routerTopic";
+import { subjectRouter } from "./Routes/routerSubject";
 const path = './build/uploads'
 
 fs.access(path, (error) => {
@@ -66,11 +72,19 @@ app.use(
 app.use('/images', imageRouter)
 app.use('/users', userRouter)
 app.use('/passRecovers', passRecoverRouter)
+app.use('/calendars', calendarRouter)
+app.use('/historics', historicRouter)
+app.use('/subjects', subjectRouter)
+app.use('/news', newsRouter)
+app.use('/questions', questionRouter)
+app.use('/topics', topicRouter)
+
+
 
 
 mongoose
     .connect(
-        url, { dbName: "HealthyVibesBD" }
+        url, { dbName: "AprovaQuizBD" }
     )
     .then(() => {
         app.listen(process.env.Port, () => {

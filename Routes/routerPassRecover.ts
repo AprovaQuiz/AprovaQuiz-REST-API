@@ -65,7 +65,7 @@ passRecoverRouter.post('/', async (request, response) => {
 
 passRecoverRouter.patch('/password', async (request, response) => {
 
-    const { email, password, number } = request.body
+    const { email, senha, number } = request.body
 
     const userFound = await User.findOne({ email: email })
 
@@ -80,10 +80,10 @@ passRecoverRouter.patch('/password', async (request, response) => {
         const passRecover = await PassRecover.findOne({ user: userFound.id }).sort({ createdAt: -1 })
 
         if (passRecover?.number != number)
-            return response.status(401).json({ message: "Número de verificação errado", sla: passRecover?.number })
+            return response.status(401).json({ message: "Número de verificação errado" })
 
-        if (password) {
-            const senhaHash = await bcrypt.hash(password, 10)
+        if (senha) {
+            const senhaHash = await bcrypt.hash(senha, 10)
 
 
             try {

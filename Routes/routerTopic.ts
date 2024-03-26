@@ -1,24 +1,25 @@
 import { Router } from "express";
-import { verifyToken } from "../middlewares/authJWT";
 import { UserInterface } from "../Interfaces/User";
-import { SubjectInterface } from "../Interfaces/Subject";
 import { Subject } from "../Models/Subject";
+import { verifyToken } from "../middlewares/authJWT";
+import { TopicInterface } from "../Interfaces/Topic";
 
-export const subjectRouter = Router()
 
-subjectRouter.post("/", async (request, response) => {
+export const topicRouter = Router()
+
+topicRouter.post("/", async (request, response) => {
     //req.body
-    const subject: SubjectInterface = request.body;
+    const topic: TopicInterface = request.body;
     const token = await verifyToken(request.headers.authorization)
 
     if (token) {
         if ((token as UserInterface).role == "admin") {
             try {
-                const saveSubject = await Subject.create(subject);
+                const saveSubject = await Subject.create(topic);
 
                 return response.status(201).json({
                     savedID: saveSubject.id,
-                    message: "Matéria inserida no sistema"
+                    message: "Topico inserido no sistema"
                 });
             } catch (error) {
                 return response.status(500).json({ error: error });
@@ -31,15 +32,15 @@ subjectRouter.post("/", async (request, response) => {
     }
 });
 
-subjectRouter.get("/", async (request, response) => {
+topicRouter.get("/", async (request, response) => {
 
     const token = await verifyToken(request.headers.authorization)
 
     if (token) {
         try {
-            const subject = await Subject.find();
+            const topic = await Subject.find().populate('materia')
 
-            return response.status(201).json(subject);
+            return response.status(201).json(topic);
 
         } catch (error) {
             return response.status(500).json({ error: error });
@@ -50,17 +51,17 @@ subjectRouter.get("/", async (request, response) => {
 
 });
 
-subjectRouter.patch("/:id", async (request, response) => {
+topicRouter.patch("/:id", async (request, response) => {
     const id = request.params.id; // se alterar em cima altera o parâmetro
     const token = await verifyToken(request.headers.authorization)
-    const subject: SubjectInterface = request.body;
+    const topic: TopicInterface = request.body;
 
     if (token) {
         if ((token as UserInterface).role == "admin") {
             try {
-                await Subject.findByIdAndUpdate(id, subject);
+                await Subject.findByIdAndUpdate(id, topic);
 
-                return response.status(200).json(subject);
+                return response.status(200).json(topic);
             } catch (error) {
                 return response.status(500).json({ error: error });
             }
@@ -72,15 +73,15 @@ subjectRouter.patch("/:id", async (request, response) => {
     }
 });
 
-subjectRouter.delete("/:id", async (request, response) => {
+topicRouter.delete("/:id", async (request, response) => {
     const id = request.params.id; // se alterar em cima altera o parâmetro
     const token = await verifyToken(request.headers.authorization)
-    const subject: SubjectInterface = request.body;
+    const topic: TopicInterface = request.body;
 
-    if (!subject) {
+    if (!topic) {
         return response
             .status(422)
-            .json({ message: "A Matéria não foi encontrado" });
+            .json({ message: "O Topico não foi encontrado" });
     }
 
     if (token) {
@@ -88,7 +89,7 @@ subjectRouter.delete("/:id", async (request, response) => {
             try {
                 await Subject.findByIdAndDelete(id);
 
-                return response.status(200).json({ message: "Matéria deletada" });
+                return response.status(200).json({ message: "Topico deletado" });
             } catch (error) {
                 return response.status(500).json({ error: error });
             }
