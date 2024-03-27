@@ -15,10 +15,9 @@ export async function GenerateTest(
     }
     else if (topic == "nenhum") {
 
-        const subjectTopics = await Subject.find({ nome: subject }).select({ nome: 1 }).populate({ path: 'topics', select: 'questions topic' })
+        const subjectTopics = await Subject.findOne({ nome: subject }).select({ nome: 1 }).populate({ path: 'topics', select: 'questions topic' })
         if (!subjectTopics)
             return null
-
 
 
         // questions = await Topic.find().populate('questions').select({ questions: 1 })
