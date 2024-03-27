@@ -1,8 +1,8 @@
 import { Router } from "express";
 import { UserInterface } from "../Interfaces/User";
-import { Subject } from "../Models/Subject";
 import { verifyToken } from "../middlewares/authJWT";
 import { TopicInterface } from "../Interfaces/Topic";
+import { Topic } from "../Models/Topic";
 
 
 export const topicRouter = Router()
@@ -15,10 +15,10 @@ topicRouter.post("/", async (request, response) => {
     if (token) {
         if ((token as UserInterface).role == "admin") {
             try {
-                const saveSubject = await Subject.create(topic);
+                const saveTopicTopic = await Topic.create(topic);
 
                 return response.status(201).json({
-                    savedID: saveSubject.id,
+                    savedID: saveTopicTopic.id,
                     message: "Topico inserido no sistema"
                 });
             } catch (error) {
@@ -38,7 +38,7 @@ topicRouter.get("/", async (request, response) => {
 
     if (token) {
         try {
-            const topic = await Subject.find().populate('materia')
+            const topic = await Topic.find().populate('materia')
 
             return response.status(201).json(topic);
 
@@ -59,7 +59,7 @@ topicRouter.patch("/:id", async (request, response) => {
     if (token) {
         if ((token as UserInterface).role == "admin") {
             try {
-                await Subject.findByIdAndUpdate(id, topic);
+                await Topic.findByIdAndUpdate(id, topic);
 
                 return response.status(200).json(topic);
             } catch (error) {
@@ -87,7 +87,7 @@ topicRouter.delete("/:id", async (request, response) => {
     if (token) {
         if ((token as UserInterface).role == "admin") {
             try {
-                await Subject.findByIdAndDelete(id);
+                await Topic.findByIdAndDelete(id);
 
                 return response.status(200).json({ message: "Topico deletado" });
             } catch (error) {

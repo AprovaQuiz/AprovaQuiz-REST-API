@@ -3,6 +3,7 @@ import { QuestionInterface } from "../Interfaces/Question";
 import { UserInterface } from "../Interfaces/User";
 import { Question } from "../Models/Question";
 import { verifyToken } from "../middlewares/authJWT";
+import { Topic } from "../Models/Topic";
 
 export const questionRouter = Router()
 
@@ -100,3 +101,45 @@ questionRouter.delete("/:id", async (request, response) => {
     }
 });
 
+// getQuestions
+
+questionRouter.get("/generateQuiz/:subject/:topic/:questionCount", async (request, response) => {
+    // const dificulty = request.params.dificulty;
+    const subject = request.params.subject;
+    const topic = request.params.topic;
+    const questionCount = request.params.questionCount;
+
+    const token = await verifyToken(request.headers.authorization)
+
+    if (token) {
+        try {
+            // const question = await Question.find().populate('materia')
+
+
+            /*             if (dificulty != ("Easy" || "Medium" || "Hard"))
+                            return response.status(500).json({ message: "Dificuldade inválida" })
+            */
+
+            if (!Number(questionCount))
+                return response.status(500).json({ message: "Número de questões inválidas" })
+
+
+            const teste = await Topic.find()
+                .populate('questions').select({ questions: 1 })
+
+            console.log(teste)
+
+
+            console.log("Matéria:", subject, "Assunto:", topic, "TotalQuestão:", questionCount)
+
+
+            return response.status(201).json(teste);
+
+        } catch (error) {
+            return response.status(500).json({ error: error });
+        }
+    } else {
+        return response.status(403).json({ message: "Token Inválido" })
+    }
+
+});

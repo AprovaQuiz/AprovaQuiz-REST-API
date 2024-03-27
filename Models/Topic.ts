@@ -17,6 +17,9 @@ const schema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: 'Image'
     }
-}, { timestamps: true })
+}, {
+    timestamps: true
+})
+
 
 export const Topic = mongoose.model('Topic', schema)
