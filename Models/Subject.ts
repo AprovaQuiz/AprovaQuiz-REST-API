@@ -13,6 +13,17 @@ const schema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: 'Image'
     }
-}, { timestamps: true })
+}, {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+    timestamps: true
+})
 
+
+schema.virtual('topics', {
+    ref: 'Topic',
+    localField: '_id',
+    foreignField: 'materia'
+}
+)
 export const Subject = mongoose.model('Subject', schema)
