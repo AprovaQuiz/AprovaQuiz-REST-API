@@ -20,7 +20,7 @@ questionRouter.post("/", async (request, response) => {
 
                 return response.status(201).json({
                     savedID: saveQuestion.id,
-                    message: "Assunto inserido no sistema"
+                    message: "Questão inserida no sistema"
                 });
             } catch (error) {
                 return response.status(500).json({ error: error });
