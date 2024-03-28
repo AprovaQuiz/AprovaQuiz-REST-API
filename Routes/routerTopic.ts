@@ -34,11 +34,35 @@ topicRouter.post("/", async (request, response) => {
 
 topicRouter.get("/", async (request, response) => {
 
+
     const token = await verifyToken(request.headers.authorization)
 
     if (token) {
         try {
             const topic = await Topic.find().populate('materia')
+
+            return response.status(201).json(topic);
+
+        } catch (error) {
+            return response.status(500).json({ error: error });
+        }
+    } else {
+        return response.status(403).json({ message: "Token Inválido" })
+    }
+
+});
+
+topicRouter.get("/:id", async (request, response) => {
+    const id = request.params.id
+    const token = await verifyToken(request.headers.authorization)
+
+    if (token) {
+        try {
+            const topic = await Topic.findById(id)
+            if (!topic) {
+                return response.status(422).json({ message: 'Tópico não encontrado' })
+
+            }
 
             return response.status(201).json(topic);
 

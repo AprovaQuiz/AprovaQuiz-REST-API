@@ -32,8 +32,6 @@ fs.access(path, (error) => {
                 console.log("New Directory created successfully !!");
             }
         });
-    } else {
-        console.log("Given Directory already exists !!");
     }
 });
 

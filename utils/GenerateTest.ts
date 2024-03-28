@@ -1,4 +1,5 @@
 import { QuestionInterface } from "../Interfaces/Question";
+import { SubjectInterface } from "../Interfaces/Subject";
 import { Question } from "../Models/Question";
 import { Subject } from "../Models/Subject";
 import { Topic } from "../Models/Topic";
@@ -15,17 +16,30 @@ export async function GenerateTest(
     }
     else if (topic == "nenhum") {
 
-        const subjectTopics = await Subject.findOne({ nome: subject }).select({ nome: 1 }).populate({ path: 'topics', select: 'questions topic' })
+        const subjectTopics: (SubjectInterface & {
+            topics: {
+                questions: QuestionInterface[]
+            }[]
+        }) | null = await Subject
+            .findOne({ nome: subject })
+            .select({ nome: 1 })
+            .populate({
+                path: 'topics', select: 'questions topic',
+                populate: { path: 'questions', model: 'Question' }
+            })
+        // console.log(subjectTopics)
         if (!subjectTopics)
             return null
 
-
-        // questions = await Topic.find().populate('questions').select({ questions: 1 })
+        subjectTopics.topics.forEach(topic => {
+            questions = questions.concat(topic.questions)
+        })
     }
     else {
         //Gerar com todos os filtros
     }
 
+    console.log(questions)
     return RandomQuestions((questions as QuestionInterface[]), questionCount)
 
 }
