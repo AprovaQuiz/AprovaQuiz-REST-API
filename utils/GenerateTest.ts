@@ -36,7 +36,11 @@ export async function GenerateTest(
         })
     }
     else {
-        //Gerar com todos os filtros
+        const topicsQuestions = await Topic.findOne({ nome: topic }).populate('questions')
+
+
+        if (topicsQuestions)
+            questions = topicsQuestions?.questions as QuestionInterface[]
     }
 
     console.log(questions)

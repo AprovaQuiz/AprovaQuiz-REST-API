@@ -114,21 +114,14 @@ questionRouter.get("/generateQuiz/:subject/:topic/:questionCount", async (reques
 
     if (token) {
         try {
-            // const question = await Question.find().populate('materia')
 
-
-            /*             if (dificulty != ("Easy" || "Medium" || "Hard"))
-                            return response.status(500).json({ message: "Dificuldade inválida" })
-            */
 
             if (!Number(questionCount))
                 return response.status(500).json({ message: "Número de questões inválidas" })
 
-
+            // essa parte ainda n está acaba
             GenerateTest(subject, topic, Number(questionCount))
 
-
-            console.log("Matéria:", subject, "Assunto:", topic, "TotalQuestão:", questionCount)
 
 
             return response.status(201).json({ message: 'Teste' });
