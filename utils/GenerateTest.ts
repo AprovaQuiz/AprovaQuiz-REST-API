@@ -43,7 +43,6 @@ export async function GenerateTest(
             questions = topicsQuestions?.questions as QuestionInterface[]
     }
 
-    console.log(questions)
     return RandomQuestions((questions as QuestionInterface[]), questionCount)
 
 }
@@ -52,6 +51,15 @@ export async function GenerateTest(
 
 function RandomQuestions(questions: QuestionInterface[], total: number) {
 
-    // calma lá paizão
-    return questions
+    const rolledQuestions: QuestionInterface[] = []
+
+    do {
+        const randomIdex = Math.floor(Math.random() * questions.length);
+
+        rolledQuestions.push(questions[randomIdex])
+
+    } while (rolledQuestions.length < total);
+
+
+    return rolledQuestions
 }

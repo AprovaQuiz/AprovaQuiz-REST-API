@@ -90,10 +90,10 @@ userRouter.post('/login', async (request, response) => {
 
         const token = jwt.sign({
             id: userFound.id
-        }, process.env.API_SECRET || "", 
-/*         {
-            expiresIn:  // tenho que testar se n expira
-        } */
+        }, process.env.API_SECRET || "",
+            /*         {
+                        expiresIn:  // tenho que testar se n expira
+                    } */
         );
 
 
@@ -182,7 +182,8 @@ userRouter.get('/myuser', async (request, response) => {
 
         try {
 
-            const user = await User.findById((token as UserInterface).id)
+            const user = await User.findById((token as UserInterface).id).populate('image')
+
             return response.status(200).json(user)
 
         } catch (error) {

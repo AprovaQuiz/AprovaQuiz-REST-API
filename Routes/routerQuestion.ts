@@ -3,7 +3,6 @@ import { QuestionInterface } from "../Interfaces/Question";
 import { UserInterface } from "../Interfaces/User";
 import { Question } from "../Models/Question";
 import { verifyToken } from "../middlewares/authJWT";
-import { Topic } from "../Models/Topic";
 import { GenerateTest } from "../utils/GenerateTest";
 
 export const questionRouter = Router()
@@ -120,11 +119,10 @@ questionRouter.get("/generateQuiz/:subject/:topic/:questionCount", async (reques
                 return response.status(500).json({ message: "Número de questões inválidas" })
 
             // essa parte ainda n está acaba
-            GenerateTest(subject, topic, Number(questionCount))
+            const questions = await GenerateTest(subject, topic, Number(questionCount))
 
 
-
-            return response.status(201).json({ message: 'Teste' });
+            return response.status(200).json(questions);
 
         } catch (error) {
             return response.status(500).json({ error: error });

@@ -6,6 +6,7 @@ import { verifyToken } from "../middlewares/authJWT";
 import { Image } from "../Models/Image";
 import { UserInterface } from "../Interfaces/User";
 import { upload } from "../middlewares/storageImg";
+import { User } from "../Models/User";
 
 export const imageRouter = Router()
 
@@ -38,6 +39,42 @@ imageRouter.post('/', upload.single('image'), async (request, response) => {
         return response.status(403).json({ message: "Token Inválido" })
     }
 
+})
+
+imageRouter.post('/myuser', async (request, response) => {
+    const token = await verifyToken(request.headers.authorization)
+    const img: ImageInterface = request.body
+
+    if (token) {
+
+        try {
+
+
+
+            img.img = {
+                data: fs.readFileSync(path.join(__dirname, '..', 'uploads', request.file?.filename || "")),
+                contentType: 'image/png'
+            }
+
+            const savedImg = await Image.create(img)
+
+            await User.findByIdAndUpdate((token as UserInterface).id, { image: savedImg.id })
+
+            return response.status(201).json({
+                savedID: savedImg.id,
+                message: 'Imagem inserida no sistema',
+                idUsuario: (token as UserInterface).id
+            })
+
+
+
+        } catch (error) {
+            return response.status(500).json({ error: error })
+        }
+
+    } else {
+        return response.status(400).json({ message: "Token Inválido ou expirado" })
+    }
 })
 
 imageRouter.get('/', async (request, response) => {
