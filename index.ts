@@ -78,16 +78,16 @@ app.use('/questions', questionRouter)
 app.use('/topics', topicRouter)
 
 
-
+const port = Number(process.env.PORT) || 3000;
 
 mongoose
     .connect(
         url, { dbName: "AprovaQuizBD" }
     )
     .then(() => {
-        app.listen(process.env.Port, () => {
+        app.listen(port, '0.0.0.0', () => {
             console.log("\nConectado com sucesso no Mongo com usuário: ", DB_USER +
-                "! \nEscutando na porta:", process.env.Port);
+                "! \nEscutando na porta:", port);
         });
     })
     .catch(err => console.log("PUTZ GRILA!!!\n", err));
