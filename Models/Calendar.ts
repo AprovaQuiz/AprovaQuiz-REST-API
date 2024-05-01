@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 const schema = new mongoose.Schema({
     data: {
         type: Date,
-        required: [true, "Usuário necessário"]
+        required: [true, "Data necessária"]
     },
     periodo: String,
     linkReferencia: String
