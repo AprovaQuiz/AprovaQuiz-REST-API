@@ -19,7 +19,7 @@ const schema = new mongoose.Schema({
             validator: (v: []) => {
                 return v.length <= 5
             },
-            message: "Passou o limite de 5 questões"
+            message: "Passou o limite de 5 alternativas"
         },
         required: [true, "Precisa das alternativas"]
     },
