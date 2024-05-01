@@ -19,11 +19,11 @@ const schema = new mongoose.Schema({
     tipoSimulado: {
         materia: {
             type: mongoose.Types.ObjectId,
-            ref: 'Matter'
+            ref: 'Subject'
         },
         assunto: {
             type: mongoose.Types.ObjectId,
-            ref: 'Subject'
+            ref: 'Topic'
         }
     },
     user: {
