@@ -33,13 +33,13 @@ passRecoverRouter.post('/', async (request, response) => {
             port: 587,
             secure: false,
             auth: {
-                user: "hannah.macgyver35@ethereal.email",
-                pass: "KQp5fFHupkS4dvHPUM",
+                user: "elvis.osinski@ethereal.email",
+                pass: "YcQBNf1DNvwfC897Pp",
             },
         });
 
         await transporter.sendMail({
-            from: 'hannah.macgyver35@ethereal.email', // sender address
+            from: 'elvis.osinski@ethereal.email', // sender address
             to: user.email, // list of receivers
             subject: "Recuperar senha AprovaQuiz", // Subject line
             text: "Aqui está o código enviado para seu email", // plain text body
