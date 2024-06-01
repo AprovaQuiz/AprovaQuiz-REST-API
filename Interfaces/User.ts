@@ -6,5 +6,5 @@ export interface UserInterface {
     role: string,
     userName: string,
     dataNasc: Date,
-    numCelular: number
+    numCelular: string
 }
