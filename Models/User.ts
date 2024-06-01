@@ -8,15 +8,16 @@ const schema = new mongoose.Schema({
     },
     userName: {
         type: String,
-        required: [true, "Usuário sem username"]
+        required: [true, "Usuário sem username"],
+        unique: true,
     },
     dataNasc: {
         type: Date,
         required: [true, "Sem data de nascimento"]
     },
     numCelular: {
-        type: Number,
-        min: [11, 'Número de Telefone Inválido'],
+        type: String,
+        required: [true, "Sem Número de Celular"]
     },
     email: {
         type: String,
