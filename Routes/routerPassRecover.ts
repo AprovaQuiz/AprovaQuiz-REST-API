@@ -82,6 +82,8 @@ passRecoverRouter.post('/verifyNumber', async (request, response) => {
         if (passRecover?.number != number)
             return response.status(401).json({ message: "Número de verificação errado" })
 
+        return response.status(200).json({ message: "Número correto" })
+
 
     } catch (error) {
         return response.status(500)
