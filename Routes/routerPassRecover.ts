@@ -63,6 +63,34 @@ passRecoverRouter.post('/', async (request, response) => {
 })
 
 
+passRecoverRouter.post('/verifyNumber', async (request, response) => {
+
+    const { email, number } = request.body
+
+    const userFound = await User.findOne({ email: email })
+
+    if (!userFound) {
+        return response.status(401)
+            .json({
+                message: 'O usuário Inválido.'
+            });
+    }
+
+    try {
+        const passRecover = await PassRecover.findOne({ user: userFound.id }).sort({ createdAt: -1 })
+
+        if (passRecover?.number != number)
+            return response.status(401).json({ message: "Número de verificação errado" })
+
+
+    } catch (error) {
+        return response.status(500)
+            .json({
+                message: error
+            });
+    }
+})
+
 passRecoverRouter.patch('/password', async (request, response) => {
 
     const { email, senha, number } = request.body
@@ -98,6 +126,7 @@ passRecoverRouter.patch('/password', async (request, response) => {
                 return response.status(500).json({ error: error })
             }
         }
+
 
 
     } catch (error) {
