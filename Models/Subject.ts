@@ -4,8 +4,9 @@ const schema = new mongoose.Schema({
     pertence: {
         type: String,
         enum: [
-            "Ciências da Natureza", "Ciências Humanas",
-            "Matemática", "Linguagens"
+            "História", "Geografia",
+            "Matemática", "Português",
+            "Física"
         ],
         required: [true, "É necessário informar o que a matéria pertence"]
     },

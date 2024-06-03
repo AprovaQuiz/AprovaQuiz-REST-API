@@ -9,12 +9,12 @@ export async function GenerateTest(
 ): Promise<QuestionInterface[] | null> {
 
     let questions: QuestionInterface[] = []
-    if (subject == "nenhum" && topic == "nenhum") {
+    if (subject == "Nenhuma" && topic == "Nenhum") {
         //gerar padrão
         questions = await Question.find()
 
     }
-    else if (topic == "nenhum") {
+    else if (topic == "Nenhum") {
 
         const subjectTopics: (SubjectInterface & {
             topics: {

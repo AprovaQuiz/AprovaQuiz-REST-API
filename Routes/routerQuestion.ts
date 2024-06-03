@@ -118,7 +118,7 @@ questionRouter.get("/generateQuiz/:subject/:topic/:questionCount", async (reques
             if (!Number(questionCount))
                 return response.status(500).json({ message: "Número de questões inválidas" })
 
-            // essa parte ainda n está acaba
+
             const questions = await GenerateTest(subject, topic, Number(questionCount))
 
 
