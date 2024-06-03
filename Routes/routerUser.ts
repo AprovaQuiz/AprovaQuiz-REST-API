@@ -196,7 +196,7 @@ userRouter.get('/myuser', async (request, response) => {
         }
 
     } else {
-        return response.status(400).json({ message: "Token Inválido ou expirado" })
+        return response.status(403).json({ message: "Token Inválido ou expirado" })
     }
 })
 
