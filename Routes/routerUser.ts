@@ -76,7 +76,7 @@ userRouter.post('/login', async (request, response) => {
         if (!userFound) {
             return response.status(401)
                 .json({
-                    message: 'O usuário Inválido.'
+                    message: 'O Email Inválido.'
                 });
         }
 
