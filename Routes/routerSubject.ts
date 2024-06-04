@@ -3,6 +3,7 @@ import { verifyToken } from "../middlewares/authJWT";
 import { UserInterface } from "../Interfaces/User";
 import { SubjectInterface } from "../Interfaces/Subject";
 import { Subject } from "../Models/Subject";
+import { Topic } from "../Models/Topic";
 
 export const subjectRouter = Router()
 
@@ -57,13 +58,13 @@ subjectRouter.get("/topics/:subjectParam", async (request, response) => {
 
     if (token) {
         try {
-            let subject
+            let topic
             if (subjectParam == "Nenhuma")
-                subject = await Subject.find().populate('topics');
+                topic = await Topic.find();
             else
-                subject = await Subject.find({ nome: subjectParam }).populate('topics');
+                topic = await Subject.find({ nome: subjectParam }).populate('topics');
 
-            return response.status(201).json(subject);
+            return response.status(201).json(topic);
 
         } catch (error) {
             return response.status(500).json({ error: error });
