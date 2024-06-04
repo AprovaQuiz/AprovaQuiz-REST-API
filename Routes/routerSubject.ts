@@ -50,6 +50,30 @@ subjectRouter.get("/", async (request, response) => {
 
 });
 
+subjectRouter.get("/topics/:subjectParam", async (request, response) => {
+
+    const token = await verifyToken(request.headers.authorization)
+    const subjectParam = request.params.subjectParam
+
+    if (token) {
+        try {
+            let subject
+            if (subjectParam == "Nenhuma")
+                subject = await Subject.find().populate('topics');
+            else
+                subject = await Subject.find({ nome: subjectParam }).populate('topics');
+
+            return response.status(201).json(subject);
+
+        } catch (error) {
+            return response.status(500).json({ error: error });
+        }
+    } else {
+        return response.status(403).json({ message: "Token Inválido" })
+    }
+
+});
+
 subjectRouter.patch("/:id", async (request, response) => {
     const id = request.params.id; // se alterar em cima altera o parâmetro
     const token = await verifyToken(request.headers.authorization)
