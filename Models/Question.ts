@@ -23,6 +23,7 @@ const schema = new mongoose.Schema({
         },
         required: [true, "Precisa das alternativas"]
     },
+    lugarAno: String,
     alternativaCorreta: {
         type: String,
         required: [true, "Precisa da Alternatica Correta"],

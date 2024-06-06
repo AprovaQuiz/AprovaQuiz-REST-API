@@ -8,5 +8,6 @@ export interface QuestionInterface {
         letra: string
     }[],
     alternativaCorreta: string,
-    image: ObjectId | undefined
+    image: ObjectId | undefined,
+    lugarAno: string
 }
