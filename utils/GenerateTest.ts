@@ -43,7 +43,10 @@ export async function GenerateTest(
             questions = topicsQuestions?.questions as QuestionInterface[]
     }
 
-    return RandomQuestions((questions as QuestionInterface[]), questionCount)
+    if (questions)
+        return RandomQuestions((questions as QuestionInterface[]), questionCount)
+    else
+        return null
 
 }
 
