@@ -2,9 +2,13 @@ import mongoose from 'mongoose';
 
 const schema = new mongoose.Schema({
 
-    texto: {
+    enunciado: {
         type: String,
         required: [true, "Precisa do texto informativo da questão"]
+    },
+    pergunta: {
+        type: String,
+        required: [true, "Precisa da Pergunta do texto"]
     },
     alternativas: {
         type: [{

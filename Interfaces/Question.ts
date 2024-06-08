@@ -2,7 +2,8 @@ import { ObjectId } from "mongoose"
 
 export interface QuestionInterface {
     id: string,
-    texto: string,
+    enunciado: string,
+    pergunta: string,
     alternativas: {
         textoAlt: string,
         letra: string
