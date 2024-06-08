@@ -38,7 +38,7 @@ questionRouter.get("/", async (request, response) => {
 
     if (token) {
         try {
-            const question = await Question.find().populate('materia')
+            const question = await Question.find()
 
             return response.status(201).json(question);
 
