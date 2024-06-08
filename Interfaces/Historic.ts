@@ -1,6 +1,6 @@
 export interface HistoricInterface {
     id: string,
-    questoesFeitas: [{ questao: string, respRegistrada: string }],
+    questoesFeitas: [{ questao: string, respRegistrada: number }],
     qtdDeAcertos: number,
     qtdDeErros: number,
     tipoSimulado: {

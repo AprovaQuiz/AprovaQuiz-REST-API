@@ -7,7 +7,7 @@ const schema = new mongoose.Schema({
             ref: 'Question'
         },
         respRegistrada: {
-            type: String,
+            type: Number,
             maxLenght: 1
         },
         acerto: Boolean,
