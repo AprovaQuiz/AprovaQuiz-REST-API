@@ -42,8 +42,9 @@ export async function GenerateTest(
         if (topicsQuestions)
             questions = topicsQuestions?.questions as QuestionInterface[]
     }
+    console.log(questions)
 
-    if (questions == null)
+    if (questions != null)
         return RandomQuestions((questions as QuestionInterface[]), questionCount)
     else
         return null
