@@ -55,6 +55,9 @@ export async function GenerateTest(
 
 function RandomQuestions(questions: QuestionInterface[], total: number) {
 
+    if (questions == null)
+        return null
+
     const rolledQuestions: QuestionInterface[] = []
 
     do {
