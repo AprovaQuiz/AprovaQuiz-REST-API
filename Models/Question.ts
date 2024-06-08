@@ -13,11 +13,6 @@ const schema = new mongoose.Schema({
     alternativas: {
         type: [{
             textoAlt: String,
-            letra: {
-                type: String,
-                maxLenght: 1
-            },
-            // talvez faça mais sentido pegar pelo index, mas vou deixar por enquanto
         }],
         validate: {
             validator: (v: []) => {
@@ -29,7 +24,7 @@ const schema = new mongoose.Schema({
     },
     lugarAno: String,
     alternativaCorreta: {
-        type: String,
+        type: Number,
         required: [true, "Precisa da Alternatica Correta"],
         maxLenght: 1
     },

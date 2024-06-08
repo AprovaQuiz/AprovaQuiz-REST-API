@@ -6,9 +6,8 @@ export interface QuestionInterface {
     pergunta: string,
     alternativas: {
         textoAlt: string,
-        letra: string
     }[],
-    alternativaCorreta: string,
+    alternativaCorreta: number,
     image: ObjectId | undefined,
     lugarAno: string
 }
