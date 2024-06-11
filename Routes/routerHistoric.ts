@@ -67,6 +67,7 @@ historicRouter.get('/myHistorics', async (request, response) => {
         try {
 
             const historics = await Historic.find({ user: (token as UserInterface).id })
+                .populate({ path: "tipoSimulado", populate: { path: "materia assunto" } })
             return response.status(200).json(historics)
 
         } catch (error) {
