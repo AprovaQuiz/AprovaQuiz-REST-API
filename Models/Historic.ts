@@ -11,7 +11,6 @@ const schema = new mongoose.Schema({
             maxLenght: 1
         },
         acerto: Boolean,
-        tempoQuestao: Number,
     }],
     qtdDeAcertos: Number,
     qtdDeErros: Number,
