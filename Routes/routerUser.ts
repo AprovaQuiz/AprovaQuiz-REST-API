@@ -46,7 +46,7 @@ userRouter.post('/', async (request, response) => {
                 error: error,
                 message: "Email já cadastrado"
             })
-        else if ((error as ErrorDescription).code == 11000 && (error as ErrorDescription).keyPattern.userName == 1)
+        if ((error as ErrorDescription).code == 11000 && (error as ErrorDescription).keyPattern.userName == 1)
             return response.status(500).json({
                 error: error,
                 message: "Username já em uso"
