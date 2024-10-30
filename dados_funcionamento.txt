@@ -1,0 +1,140 @@
+// Users
+[
+
+	{
+		"_id": "6722881f9f4f02c541c4874f",
+		"nome": "Teste",
+		"userName": "Teste",
+		"dataNasc": "2004-10-10T00:00:00.000Z",
+		"numCelular": "(11)1111-1111",
+		"email": "teste.teste@gmail.com",
+		"senha": "$2a$10$5BNEs4WZHYMhxSnmFVtx9OwUYPp6LS0xH.fAWTsJbLaXy5vyejLU2",
+		"role": "admin",
+		"createdAt": "2024-10-30T19:25:19.137Z",
+		"updatedAt": "2024-10-30T19:49:47.010Z",
+		"__v": 0
+	},
+	{
+		"_id": "6722884a9f4f02c541c48752",
+		"nome": "lucas",
+		"userName": "lucas",
+		"dataNasc": "2004-10-10T00:00:00.000Z",
+		"numCelular": "(11)1111-1111",
+		"email": "lucas@teste.com",
+		"senha": "$2a$10$9R26znRO4OgRnENfrnCZbuWaS/X0517dyymloZJDUSKBmaQFygHgG",
+		"role": "admin",
+		"createdAt": "2024-10-30T19:26:02.259Z",
+		"updatedAt": "2024-10-30T19:39:25.288Z",
+		"__v": 0,
+		"image": "67228b0e9f4f02c541c48767"
+	},
+	{
+		"_id": "672288b49f4f02c541c4875a",
+		"nome": "Teste",
+		"userName": "Teste2",
+		"dataNasc": "2004-10-10T00:00:00.000Z",
+		"numCelular": "(11)1111-1111",
+		"email": "teste@teste1.com",
+		"senha": "$2a$10$c/yq8bPTGr6azjc3J5yKb.FgLChM37/tWymDUhItz21eca9Ag9s7S",
+		"role": "normal",
+		"createdAt": "2024-10-30T19:27:48.605Z",
+		"updatedAt": "2024-10-30T19:27:48.605Z",
+		"__v": 0
+	}
+]
+
+// PassRecovers
+
+[
+	{
+		"_id": "67228c109f4f02c541c4876e",
+		"user": "6722881f9f4f02c541c4874f",
+		"number": 7191,
+		"createdAt": "2024-10-30T19:42:08.457Z",
+		"updatedAt": "2024-10-30T19:42:08.457Z",
+		"__v": 0
+	}
+]
+
+// News
+[
+	{
+		"_id": "67228f3e9f4f02c541c4878b",
+		"titulo": "Idiota atrasa e perde a prova do ENEM",
+		"linkFonte": "confianopai.com/news/enem-idiota",
+		"fonte": "Confia News",
+		"resumo": "Um jovem de 17 anos atrasou para a prova do ENEM por que estava distraido com a ranqueada do League of Legends (LOL). Sua mãe lhe deu uma surra e agora ele ele joga DOTA.",
+		"conteudo": "Um caso inusitado chamou a atenção nas redes sociais: um jovem de 17 anos, que se preparava para a prova do ENEM, acabou atrasando devido à sua distração com uma partida ranqueada de League of Legends. Apesar da importância do exame, o jogador não conseguiu deixar o jogo de lado a tempo. Segundo relatos, o jovem estava tão envolvido na partida que não percebeu o tempo passando e, quando finalmente se deu conta, já era tarde demais. Ele chegou à escola e viu que as portas estavam fechadas. A frustração foi grande, não apenas pela prova perdida, mas também pela reação da mãe, que, ao saber do ocorrido, não hesitou em aplicar uma punição severa. Após o incidente, o jovem decidiu que era hora de mudar de ares e, em vez de continuar jogando LOL, optou por experimentar DOTA. Esse novo jogo promete um desafio diferente e, quem sabe, uma nova perspectiva sobre a importância de gerenciar melhor seu tempo.",
+		"createdAt": "2024-10-30T19:55:42.804Z",
+		"updatedAt": "2024-10-30T19:55:42.804Z",
+		"__v": 0
+	}
+]
+
+// Calendar
+[
+	{
+		"_id": "672290079f4f02c541c48790",
+		"data": "2024-10-30T00:00:00.000Z",
+		"periodo": "tarde",
+		"createdAt": "2024-10-30T19:59:03.863Z",
+		"updatedAt": "2024-10-30T19:59:03.863Z",
+		"__v": 0
+	}
+]
+
+//Topics
+[
+	{
+		"_id": "67228c569f4f02c541c48773",
+		"nome": "Ditadura Militar",
+		"questions": [
+			"672289099f4f02c541c4875e"
+		],
+		"createdAt": "2024-10-30T19:43:18.982Z",
+		"updatedAt": "2024-10-30T19:49:16.444Z",
+		"__v": 0,
+		"materia": {
+			"_id": "67228cc19f4f02c541c48776",
+			"pertence": "Ciências Humanas",
+			"nome": "História",
+			"createdAt": "2024-10-30T19:45:05.521Z",
+			"updatedAt": "2024-10-30T19:45:05.521Z",
+			"__v": 0,
+			"id": "67228cc19f4f02c541c48776"
+		}
+	}
+]
+
+//subjects
+[
+	{
+		"_id": "67228cc19f4f02c541c48776",
+		"pertence": "Ciências Humanas",
+		"nome": "História",
+		"createdAt": "2024-10-30T19:45:05.521Z",
+		"updatedAt": "2024-10-30T19:45:05.521Z",
+		"__v": 0,
+		"id": "67228cc19f4f02c541c48776"
+	}
+]
+
+// Historic
+{
+  "_id": "672295a49f4f02c541c487b6",
+  "qtdDeAcertos": 1,
+  "qtdDeErros": 0,
+  "user": "6722884a9f4f02c541c48752",
+  "tempoTotal": 10,
+  "questoesFeitas": [
+    {
+      "questao": "672289099f4f02c541c4875e",
+      "respRegistrada": 1,
+      "acerto": true,
+      "_id": "672295f19f4f02c541c487be"
+    }
+  ],
+  "createdAt": "2024-10-30T20:23:00.219Z",
+  "updatedAt": "2024-10-30T20:24:17.735Z",
+  "__v": 0
+}
