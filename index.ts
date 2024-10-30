@@ -38,7 +38,7 @@ fs.access(path, (error) => {
 
 const app = express();
 
-app.set('trust proxy', 1)
+app.set('trust proxy', 5)
 
 const limiter = rateLimit({
     windowMs: 1 * 60 * 1000, // 1 minute
