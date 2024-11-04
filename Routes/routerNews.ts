@@ -32,20 +32,16 @@ newsRouter.post("/", async (request, response) => {
 });
 
 newsRouter.get("/", async (request, response) => {
-    const token = await verifyToken(request.headers.authorization)
 
-    if (token) {
-        try {
-            const news = await News.find();
+    try {
+        const news = await News.find();
 
-            return response.status(201).json(news);
+        return response.status(201).json(news);
 
-        } catch (error) {
-            return response.status(500).json({ error: error });
-        }
-    } else {
-        return response.status(403).json({ message: "Token Inválido" })
+    } catch (error) {
+        return response.status(500).json({ error: error });
     }
+
 
 });
 
