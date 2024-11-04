@@ -18,7 +18,7 @@ newsRouter.post("/", async (request, response) => {
 
                 return response.status(201).json({
                     savedID: saveNews.id,
-                    message: "Calendário inserido no sistema"
+                    message: "Notícias inserido no sistema"
                 });
             } catch (error) {
                 return response.status(500).json({ error: error });
