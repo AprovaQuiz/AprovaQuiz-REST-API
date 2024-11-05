@@ -46,6 +46,20 @@ subjectRouter.get("/", async (request, response) => {
 
 });
 
+subjectRouter.get("/withImages", async (request, response) => {
+
+    try {
+        const subject = await Subject.find().populate('image');
+
+        return response.status(201).json(subject);
+
+    } catch (error) {
+        return response.status(500).json({ error: error });
+    }
+
+
+});
+
 subjectRouter.get("/topics/:subjectParam", async (request, response) => {
 
     const token = await verifyToken(request.headers.authorization)
