@@ -34,20 +34,15 @@ subjectRouter.post("/", async (request, response) => {
 
 subjectRouter.get("/", async (request, response) => {
 
-    const token = await verifyToken(request.headers.authorization)
+    try {
+        const subject = await Subject.find();
 
-    if (token) {
-        try {
-            const subject = await Subject.find();
+        return response.status(201).json(subject);
 
-            return response.status(201).json(subject);
-
-        } catch (error) {
-            return response.status(500).json({ error: error });
-        }
-    } else {
-        return response.status(403).json({ message: "Token Inválido" })
+    } catch (error) {
+        return response.status(500).json({ error: error });
     }
+
 
 });
 
