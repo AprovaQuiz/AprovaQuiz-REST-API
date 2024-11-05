@@ -62,25 +62,22 @@ subjectRouter.get("/withImages", async (request, response) => {
 
 subjectRouter.get("/topics/:subjectParam", async (request, response) => {
 
-    const token = await verifyToken(request.headers.authorization)
     const subjectParam = request.params.subjectParam
 
-    if (token) {
-        try {
-            let topic
-            if (subjectParam == "Nenhuma")
-                topic = await Topic.find();
-            else
-                topic = await Subject.find({ nome: subjectParam }).populate('topics');
 
-            return response.status(201).json(topic);
+    try {
+        let topic
+        if (subjectParam == "Nenhuma")
+            topic = await Topic.find();
+        else
+            topic = await Subject.find({ nome: subjectParam }).populate('topics');
 
-        } catch (error) {
-            return response.status(500).json({ error: error });
-        }
-    } else {
-        return response.status(403).json({ message: "Token Inválido" })
+        return response.status(201).json(topic);
+
+    } catch (error) {
+        return response.status(500).json({ error: error });
     }
+
 
 });
 
