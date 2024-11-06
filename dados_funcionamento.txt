@@ -138,3 +138,37 @@
   "updatedAt": "2024-10-30T20:24:17.735Z",
   "__v": 0
 }
+
+//Questions
+{
+  "_id": "672abec9539b403caa1b71f5",
+  "enunciado": "A Operação Condor está diretamente vinculada às experiências históricas das ditaduras civil-militares que se disseminaram pelo Cone Sul entre as décadas de 1960 e 1980. Depois do Brasil (e do Paraguai de Stroessner), foi a vez da Argentina (1966), Bolívia (1966 e 1971), Uruguai e Chile (1973) e Argentina (novamente, em 1976). Em todos os casos se instalaram ditaduras civil-militares (em menor ou maior medida) com base na Doutrina de Segurança Nacional e tendo como principais características um anticomunismo militante, a identificação do inimigo interno, a imposição do papel político das Forças Armadas e a definição de fronteiras ideológicas.",
+  "pergunta": "Levando-se em conta o contexto em que foi criada, a referida operação tinha como objetivo coordenar a",
+  "alternativas": [
+    {
+      "textoAlt": "modificação de limites territoriais.",
+      "_id": "672abec9539b403caa1b71f6"
+    },
+    {
+      "textoAlt": "sobrevivência de oficiais exilados.",
+      "_id": "672abec9539b403caa1b71f7"
+    },
+    {
+      "textoAlt": "interferência de potências mundiais.",
+      "_id": "672abec9539b403caa1b71f8"
+    },
+    {
+      "textoAlt": "repressão de ativistas oposicionistas.",
+      "_id": "672abec9539b403caa1b71f9"
+    },
+    {
+      "textoAlt": "implantação de governos nacionalistas.",
+      "_id": "672abec9539b403caa1b71fa"
+    }
+  ],
+  "lugarAno": "Enem 2016",
+  "alternativaCorreta": 3,
+  "createdAt": "2024-11-06T00:56:41.239Z",
+  "updatedAt": "2024-11-06T00:56:41.239Z",
+  "__v": 0
+}
