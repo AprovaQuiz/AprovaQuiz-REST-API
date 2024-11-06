@@ -52,6 +52,25 @@ topicRouter.get("/", async (request, response) => {
 
 });
 
+topicRouter.get("/idTopic/:nome", async (request, response) => {
+    const nome = request.params.nome
+
+    try {
+        const topic = await Topic.findOne({ nome: nome })
+        if (!topic) {
+            return response.status(422).json({ message: 'Tópico não encontrado' })
+
+        }
+
+        return response.status(201).json({ id: topic.id });
+
+    } catch (error) {
+        return response.status(500).json({ error: error });
+    }
+
+
+});
+
 topicRouter.get("/:id", async (request, response) => {
     const id = request.params.id
     const token = await verifyToken(request.headers.authorization)

@@ -109,26 +109,20 @@ questionRouter.get("/generateQuiz/:subject/:topic/:questionCount", async (reques
     const topic = request.params.topic;
     const questionCount = request.params.questionCount;
 
-    const token = await verifyToken(request.headers.authorization)
-
-    if (token) {
-        try {
+    try {
 
 
-            if (!Number(questionCount))
-                return response.status(500).json({ message: "Número de questões inválidas" })
+        if (!Number(questionCount))
+            return response.status(500).json({ message: "Número de questões inválidas" })
 
 
-            const questions = await GenerateTest(subject, topic, Number(questionCount))
+        const questions = await GenerateTest(subject, topic, Number(questionCount))
 
 
-            return response.status(200).json(questions);
+        return response.status(200).json(questions);
 
-        } catch (error) {
-            return response.status(500).json({ error: error });
-        }
-    } else {
-        return response.status(403).json({ message: "Token Inválido" })
+    } catch (error) {
+        return response.status(500).json({ error: error });
     }
 
 });

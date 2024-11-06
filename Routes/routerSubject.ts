@@ -70,9 +70,32 @@ subjectRouter.get("/topics/:subjectParam", async (request, response) => {
         if (subjectParam == "Nenhuma")
             topic = await Topic.find();
         else
-            topic = await Subject.find({ nome: subjectParam }).populate('topics');
+            topic = await Subject.findOne({ nome: subjectParam }).populate('topics');
 
         return response.status(201).json(topic);
+
+    } catch (error) {
+        return response.status(500).json({ error: error });
+    }
+
+
+});
+
+subjectRouter.get("/idSubject/:nome", async (request, response) => {
+
+    const nome = request.params.nome
+
+
+    try {
+
+        const subject = await Subject.findOne({ nome: nome })
+
+        if (!subject) {
+            return response.status(422).json({ message: 'Matéria não encontrada' })
+
+        }
+
+        return response.status(201).json({ id: subject.id });
 
     } catch (error) {
         return response.status(500).json({ error: error });
