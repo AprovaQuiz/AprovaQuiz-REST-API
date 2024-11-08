@@ -67,11 +67,11 @@ newsRouter.patch("/:id", async (request, response) => {
     }
 });
 
-newsRouter.get("/titulo/:titulo", async (request, response) => {
-    const titulo = request.params.titulo; // se alterar em cima altera o parâmetro
+newsRouter.get("/:id", async (request, response) => {
+    const id = request.params.id; // se alterar em cima altera o parâmetro
 
     try {
-        const news = await News.findOne({ titulo: titulo });
+        const news = await News.findById(id);
 
         if (!news) return response.status(422).json({ message: 'Notícia não encontrada' })
 
