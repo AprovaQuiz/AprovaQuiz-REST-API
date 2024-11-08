@@ -67,6 +67,22 @@ newsRouter.patch("/:id", async (request, response) => {
     }
 });
 
+newsRouter.get("/titulo/:titulo", async (request, response) => {
+    const titulo = request.params.titulo; // se alterar em cima altera o parâmetro
+
+    try {
+        const news = await News.findOne({ titulo: titulo });
+
+        if (!news) return response.status(422).json({ message: 'Notícia não encontrada' })
+
+        return response.status(200).json(news);
+    } catch (error) {
+        return response.status(500).json({ error: error });
+    }
+
+
+});
+
 newsRouter.delete("/:id", async (request, response) => {
     const id = request.params.id; // se alterar em cima altera o parâmetro
     const token = await verifyToken(request.headers.authorization)
