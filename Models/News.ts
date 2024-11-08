@@ -3,7 +3,8 @@ import mongoose from 'mongoose';
 const schema = new mongoose.Schema({
     titulo: {
         type: String,
-        required: [true, "Precisa do título"]
+        required: [true, "Precisa do título"],
+        unique: true,
     },
     linkFonte: {
         type: String,
