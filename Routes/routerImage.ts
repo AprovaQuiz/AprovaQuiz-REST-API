@@ -137,7 +137,10 @@ imageRouter.delete("/:id", async (request, response) => {
     }
 
     if (token) {
-        if ((token as UserInterface).role == "admin") {
+
+        const user = await User.findById((token as UserInterface).id)
+
+        if ((token as UserInterface).role == "admin" || (user?.image && (user.image == id))) {
             try {
                 await Image.findByIdAndDelete(id);
 
