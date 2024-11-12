@@ -89,7 +89,9 @@ historicRouter.get('/:id', async (request, response) => {
     if (token) {
 
         try {
-            const historic = await Historic.findById(id).populate({ path: "tipoSimulado", populate: { path: "materia assunto", select: "nome pertence" } })
+            const historic = await Historic.findById(id)
+                .populate({ path: "tipoSimulado", populate: { path: "materia assunto", select: "nome pertence" } })
+                .populate({ path: "questoesFeitas", populate: { path: "questao" } })
 
             if (!historic) {
                 return response.status(422).json({ message: 'Valores de historico não foram encontrados' })
