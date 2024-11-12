@@ -67,6 +67,7 @@ historicRouter.get('/myHistorics', async (request, response) => {
         try {
 
             const historics = await Historic.find({ user: (token as UserInterface).id })
+                // Da para facilmente colocar uma imagem aqui
                 .populate({ path: "tipoSimulado", populate: { path: "materia assunto", select: "nome pertence" } })
                 .populate({ path: "questoesFeitas", populate: { path: "questao" } })
             return response.status(200).json(historics)
