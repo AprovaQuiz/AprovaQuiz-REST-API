@@ -91,7 +91,7 @@ newsRouter.delete("/:id", async (request, response) => {
     if (!news) {
         return response
             .status(422)
-            .json({ message: "A notócia não foi encontrada" });
+            .json({ message: "A notícia não foi encontrada" });
     }
 
     if (token) {
